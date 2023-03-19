@@ -1,3 +1,4 @@
+
 do {
     let hufflepuff = 0;
     let ravenclaw = 0;
@@ -67,5 +68,6 @@ if ((hufflepuff>ravenclaw)&&(hufflepuff>gryffindor)&&(hufflepuff>slytherin)) {
 }else {
     alert ("intentalo de nuevo")
 }
+let continuar = prompt ("Quieres intentarlo de vuelta? \nsi\nno");
 
-} while (condition);
+} while (continuar=="si")
