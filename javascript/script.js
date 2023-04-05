@@ -39,10 +39,10 @@ pregunta.opciones.forEach((opcion, indice) => {
 let respuesta;
 do {
     respuesta = prompt(mensaje);
-    if (!pregunta.opciones.includes(respuesta)) {
-        alert("Esta no es una de las opciones! Selecciona una.");
-    }
-} while (!pregunta.opciones.includes(respuesta));
+        if (!["1", "2", "3", "4"].includes(respuesta)) { // Validación modificada
+            alert("Esta no es una de las opciones! Selecciona una.");
+        }
+    } while (!["1", "2", "3", "4"].includes(respuesta));
 
 return respuesta;
 }
@@ -50,6 +50,7 @@ return respuesta;
 // Función principal que ejecuta el quiz
 function hacerQuiz() {
 const respuestas = [];
+alert("A continuación empezaremos con el momento que definirá tu vida!\nAhora descubrirás a qué casa de Hogwarts perteneces.\nSelecciona las opciones que se te presentarán con los números correspondientes.")
 preguntas.forEach((pregunta) => {
 const respuesta = mostrarPregunta(pregunta);
 respuestas.push(respuesta);
