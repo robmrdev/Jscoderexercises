@@ -1,73 +1,92 @@
-let continuar;
+// Definimos las preguntas y respuestas
+const preguntas = [
+    {
+    pregunta: "¿Cuál es tu asignatura favorita?",
+    opciones: [
+        "Defensa contra las artes oscuras",
+        "Herbologia",
+        "Adivinacion",
+        "Pociones",
+    ],
+    },
+    {
+    pregunta: "¿Cuál es tu animal favorito?",
+    opciones: [
+        "Leon",
+        "Serpiente",
+        "Aguila",
+        "Tejon"
+    ],
+    },
+    {
+    pregunta: "¿Qué cualidad valoras más?",
+    opciones: [
+        "Valentia",
+        "Astucia",
+        "Inteligencia",
+        "Lealtad"
+    ],
+    },
+];
+
+// Función que muestra la pregunta y opciones al usuario
+function mostrarPregunta(pregunta) {
+let mensaje = pregunta.pregunta + "\n";
+pregunta.opciones.forEach((opcion, indice) => {
+    mensaje += `${indice + 1}. ${opcion}\n`;
+});
+
+let respuesta;
 do {
-    let hufflepuff = 0;
-    let ravenclaw = 0;
-    let gryffindor = 0;
-    let slytherin = 0;
+    respuesta = prompt(mensaje);
+    if (!pregunta.opciones.includes(respuesta)) {
+        alert("Esta no es una de las opciones! Selecciona una.");
+    }
+} while (!pregunta.opciones.includes(respuesta));
 
-let puntuacion = prompt("Cual es tu color favorito?\na - Amarillo\nb - Azul\nc - Rojo    \nd - Verde")
-if ((puntuacion == "a") || (puntuacion == "A")){
-    hufflepuff++
-}else if ((puntuacion == "b") || (puntuacion == "B")){
-    ravenclaw++
-}else if ((puntuacion == "c") || (puntuacion == "C")){
-    gryffindor++
-}else if ((puntuacion == "d") || (puntuacion == "D")){
-    slytherin++
-}else{
-    alert("Error")
+return respuesta;
 }
 
-puntuacion = prompt("Encuentras a una persona desmayada en el suelo con un golpe en la cabeza y tu...\na - Tratas de ayudarlo\nb - Decides averiguar que paso y los detalles del evento\nc - Buscas al culpable para darle su merecido\nd - Revisas sus bolsillos por si encuentras algo de valor y te lo quedas");
-if ((puntuacion == "a") || (puntuacion == "A")){
-    hufflepuff++
-}else if ((puntuacion == "b") || (puntuacion == "B")){
-    ravenclaw++
-}else if ((puntuacion == "c") || (puntuacion == "C")){
-    gryffindor++
-}else if ((puntuacion == "d") || (puntuacion == "D")){
-    slytherin++
-}else{
-    alert("Error")
+// Función principal que ejecuta el quiz
+function hacerQuiz() {
+const respuestas = [];
+preguntas.forEach((pregunta) => {
+const respuesta = mostrarPregunta(pregunta);
+respuestas.push(respuesta);
+});
+
+// Determinamos la casa ganadora
+const casas = {
+    Gryffindor: 0,
+    Slytherin: 0,
+    Ravenclaw: 0,
+    Hufflepuff: 0,
+};
+
+respuestas.forEach((respuesta) => {
+    switch (respuesta) {
+        case "1":
+        casas.Gryffindor++;
+        break;
+        case "2":
+        casas.Slytherin++;
+        break;
+        case "3":
+        casas.Ravenclaw++;
+        break;
+        case "4":
+        casas.Hufflepuff++;
+        break;
+        default:
+        break;
+    }
+});
+
+// Ordenamos las casas por puntaje y mostramos la ganadora
+const casasOrdenadas = Object.entries(casas).sort((a, b) => b[1] - a[1]);
+const casaGanadora = casasOrdenadas[0][0];
+alert(`Fuiste seleccionad@ para la casa ${casaGanadora}!!`);
 }
 
-puntuacion = prompt("Si tuvieses que elegir un animal, Cual seria?\na - Tejon\nb - Cuervo\nc - Leon\nd - Serpiente")
-if ((puntuacion == "a") || (puntuacion == "A")){
-    hufflepuff++
-}else if ((puntuacion == "b") || (puntuacion == "B")){
-    ravenclaw++
-}else if ((puntuacion == "c") || (puntuacion == "C")){
-    gryffindor++
-}else if ((puntuacion == "d") || (puntuacion == "D")){
-    slytherin++
-}else{
-    alert("Error")
-}
-
-puntuacion = prompt("Cual es tu lugar favorito del castillo?\na - Los Invernaderos\nb - La biblioteca\nc - El campo de Quidditch\nd - Las Mazmorras")
-if ((puntuacion == "a") || (puntuacion == "A")){
-    hufflepuff++
-}else if ((puntuacion == "b") || (puntuacion == "B")){
-    ravenclaw++
-}else if ((puntuacion == "c") || (puntuacion == "C")){
-    gryffindor++
-}else if ((puntuacion == "d") || (puntuacion == "D")){
-    slytherin++
-}else{
-    alert("Error")
-}
-
-if ((hufflepuff>ravenclaw)&&(hufflepuff>gryffindor)&&(hufflepuff>slytherin)) {
-    alert("Eres de Hufflepuff")    
-} else if ((ravenclaw>hufflepuff)&&(ravenclaw>gryffindor)&&(ravenclaw>slytherin)) {
-    alert("Eres de Ravenclaw")
-} else if ((gryffindor>hufflepuff)&&(gryffindor>ravenclaw)&&(gryffindor>slytherin)) {
-    alert("Eres de Gryffindor")
-} else if ((slytherin>hufflepuff)&&(slytherin>ravenclaw)&&(slytherin>gryffindor)) {
-    alert("Eres de Ravenclaw")
-}else {
-    alert ("intentalo de nuevo")
-}
-continuar = prompt ("Quieres intentarlo de vuelta? \nsi\nno");
-
-} while (continuar=="si")
+// Ejecutamos la función principal
+hacerQuiz();
