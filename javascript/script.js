@@ -4,9 +4,9 @@ const preguntas = [
     pregunta: "¿Cuál es tu asignatura favorita?",
     opciones: [
         "Defensa contra las artes oscuras",
-        "Herbologia",
-        "Adivinacion",
         "Pociones",
+        "Adivinacion",
+        "Herbologia",
     ],
     },
     {
@@ -27,6 +27,24 @@ const preguntas = [
         "Lealtad"
     ],
     },
+    {
+    pregunta: "¿Qué lugar del mundo mágico te gustaría visitar?",
+    opciones:[
+        "Hogsmeade",
+        "El Callejón Knockturn",
+        "El Ministerio de Magia",
+        "La reserva Natural de Dragones"
+    ]
+    },
+    {
+        pregunta: "¿Con cuál de estas criaturas mágicas te identificas más?",
+        opciones:[
+            "Hipogrifo",
+            "Mantícora",
+            "Esfinge",
+            "Centauro"
+        ]
+    }
 ];
 
 // Función que muestra la pregunta y opciones al usuario
