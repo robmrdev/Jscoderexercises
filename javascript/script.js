@@ -1,7 +1,7 @@
-const preguntas = [
+const questions = [
     {
-        pregunta: "¿Cuál es tu asignatura favorita?",
-        opciones: [
+        question: "¿Cuál es tu asignatura favorita?",
+        options: [
             "Defensa contra las artes oscuras",
             "Pociones",
             "Adivinacion",
@@ -9,8 +9,8 @@ const preguntas = [
         ],
         },
         {
-        pregunta: "¿Cuál es tu animal favorito?",
-        opciones: [
+        question: "¿Cuál es tu animal favorito?",
+        options: [
             "Leon",
             "Serpiente",
             "Aguila",
@@ -18,8 +18,8 @@ const preguntas = [
         ],
         },
         {
-        pregunta: "¿Qué cualidad valoras más?",
-        opciones: [
+        question: "¿Qué cualidad valoras más?",
+        options: [
             "Valentia",
             "Astucia",
             "Inteligencia",
@@ -27,8 +27,8 @@ const preguntas = [
         ],
         },
         {
-        pregunta: "¿Qué lugar del mundo mágico te gustaría visitar?",
-        opciones:[
+        question: "¿Qué lugar del mundo mágico te gustaría visitar?",
+        options:[
             "Hogsmeade",
             "El Callejón Knockturn",
             "El Ministerio de Magia",
@@ -36,8 +36,8 @@ const preguntas = [
         ]
         },
         {
-            pregunta: "¿Con cuál de estas criaturas mágicas te identificas más?",
-            opciones:[
+            question: "¿Con cuál de estas criaturas mágicas te identificas más?",
+            options:[
                 "Hipogrifo",
                 "Mantícora",
                 "Esfinge",
@@ -48,24 +48,24 @@ const preguntas = [
 const questionEl = document.getElementById("question");
 const optionsEl = document.getElementById("options");
 let currentQuestion = 0;
-const respuestas = [];
+const answers = [];
 
 function loadQuestion() {
-    const pregunta = preguntas[currentQuestion];
-    questionEl.textContent = pregunta.pregunta;
+    const question = questions[currentQuestion];
+    questionEl.textContent = question.question;
     optionsEl.innerHTML = "";
-    pregunta.opciones.forEach((opcion, indice) => {
+    question.options.forEach((opcion, index) => {
         const option = document.createElement("button");
         option.textContent = opcion;
-        option.onclick = () => checkAnswer(indice + 1);
+        option.onclick = () => checkAnswer(index + 1);
         optionsEl.appendChild(option);
     });
 }
 
 function checkAnswer(selected) {
-    respuestas.push(selected);
+    answers.push(selected);
     currentQuestion++;
-    if (currentQuestion < preguntas.length) {
+    if (currentQuestion < questions.length) {
         loadQuestion();
     } else {
         finishQuiz();
@@ -73,40 +73,40 @@ function checkAnswer(selected) {
 }
 
 function finishQuiz() {
-    const casas = {
+    const houses = {
         Gryffindor: 0,
         Slytherin: 0,
         Ravenclaw: 0,
         Hufflepuff: 0,
     };
 
-    respuestas.forEach((respuesta) => {
-        switch (respuesta) {
+    answers.forEach((answer) => {
+        switch (answer) {
             case 1:
-                casas.Gryffindor++;
+                houses.Gryffindor++;
                 break;
             case 2:
-                casas.Slytherin++;
+                houses.Slytherin++;
                 break;
             case 3:
-                casas.Ravenclaw++;
+                houses.Ravenclaw++;
                 break;
             case 4:
-                casas.Hufflepuff++;
+                houses.Hufflepuff++;
                 break;
             default:
                 break;
         }
     });
 
-    const casasOrdenadas = Object.entries(casas).sort((a, b) => b[1] - a[1]);
-    const casaGanadora = casasOrdenadas[0][0];
+    const houseInOrder = Object.entries(houses).sort((a, b) => b[1] - a[1]);
+    const selectedHouse = houseInOrder[0][0];
 //guardamos el resultado en el local Storage
-localStorage.setItem("casaGanadora", casaGanadora);
+localStorage.setItem("selectedHouse", selectedHouse);
 
 // Agregamos el resultado al DOM
-const resultadoDiv = document.getElementById("resultado");
-resultadoDiv.innerHTML = `Fuiste seleccionad@ para la casa ${localStorage.getItem("casaGanadora")}!!`;
+const outcomeDiv = document.getElementById("outcome");
+outcomeDiv.innerHTML = `Fuiste seleccionad@ para la casa ${localStorage.getItem("selectedHouse")}!!`;
 }
 
 loadQuestion();

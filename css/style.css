@@ -6,8 +6,53 @@
     font-family: "Jolly Lodger";
     text-align: center;
     font-size: 1.2em;
+    color: aliceblue;
+}
+body{
+    background-image: url(../images/background.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.general{
+    width: 70%;
+    height: 80%;
+    flex-direction: column;
+    justify-content: space-around;
 }
 h1{
-    font-size: 1.5em;
+    font-size: 2em;
     padding: 25px;
+    width: 80%;
+}
+h2 {
+    width: 80%;
+}
+.quiz {
+    flex-direction: column;
+    justify-content: space-around;
+    height: 500px;
+    width: 100%;
+}
+.options {
+    width: 80%;
+}
+#options{
+    height: 200px;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+}
+#options button {
+    height: 160px;
+    width: 22%;
+    font-size: 0.8em;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 20%;
 }
