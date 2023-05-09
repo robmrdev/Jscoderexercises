@@ -73,7 +73,6 @@ function checkAnswer(selected) {
 }
 
 function finishQuiz() {
-
     const quiz = document.getElementById("quiz");
     quiz.remove();
 
@@ -109,6 +108,7 @@ function finishQuiz() {
 localStorage.setItem("selectedHouse", selectedHouse);
 // Agregamos el resultado al DOM
 showResult();
+showSweetAlert()
 }
     function showResult() {
         const outcomeDiv = document.getElementById("outcome");
@@ -141,6 +141,28 @@ showResult();
         outcomeDiv.appendChild(houseImg);
         outcomeDiv.appendChild(houseText);
     }
+
+    //definimos la alerta para reiniciar el Quiz
+    function showSweetAlert() {
+        setTimeout(function() {
+            Swal.fire({
+            width: "40vh",
+            title: "¿Te gustaria intentarlo de nuevo?",
+            background: 'url(./images/alertBg.jpg)',
+            heightAuto:false,
+            showCloseButton: true,
+            showCancelButton: true,
+            cancelButtonText:"No",
+            focusConfirm: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // si el usuario quiere repetir el quiz, recargamos la página
+                    location.reload();
+                }
+                });
+        }, 3000);
+        }
+
 
 
 loadQuestion();

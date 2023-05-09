@@ -66,3 +66,13 @@ h2 {
     width: 50%;
     font-size: 1.2em;
 }
+.swal2-title {
+    justify-content: center;
+    display: flex;
+    width: 100%;
+}
+
+.swal2-popup {
+    height: 40vh;
+    background-size: cover!important;
+}
