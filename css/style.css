@@ -26,7 +26,7 @@ body{
     justify-content: space-around;
 }
 h1{
-    font-size: 2em;
+    font-size: 3em;
     padding: 25px;
     width: 80%;
 }
@@ -55,4 +55,14 @@ h2 {
     font-size: 0.8em;
     background: rgba(0, 0, 0, 0.35);
     border-radius: 20%;
+}
+#outcome {
+    justify-content: space-around;
+}
+#outcome img {
+    width: 30%;
+}
+#outcome p{
+    width: 50%;
+    font-size: 1.2em;
 }

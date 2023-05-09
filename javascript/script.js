@@ -57,7 +57,7 @@ function loadQuestion() {
     question.options.forEach((opcion, index) => {
         const option = document.createElement("button");
         option.textContent = opcion;
-        option.onclick = () => checkAnswer(index + 1);
+        option.addEventListener("click", () => checkAnswer(index + 1));
         optionsEl.appendChild(option);
     });
 }
@@ -73,6 +73,10 @@ function checkAnswer(selected) {
 }
 
 function finishQuiz() {
+
+    const quiz = document.getElementById("quiz");
+    quiz.remove();
+
     const houses = {
         Gryffindor: 0,
         Slytherin: 0,
@@ -103,10 +107,40 @@ function finishQuiz() {
     const selectedHouse = houseInOrder[0][0];
 //guardamos el resultado en el local Storage
 localStorage.setItem("selectedHouse", selectedHouse);
-
 // Agregamos el resultado al DOM
-const outcomeDiv = document.getElementById("outcome");
-outcomeDiv.innerHTML = `Fuiste seleccionad@ para la casa ${localStorage.getItem("selectedHouse")}!!`;
+showResult();
 }
+    function showResult() {
+        const outcomeDiv = document.getElementById("outcome");
+        const selectedHouse = localStorage.getItem("selectedHouse");
+        outcomeDiv.innerHTML = "";
+        const houseImg = document.createElement("img");
+        const houseText = document.createElement("p");
+
+        switch (selectedHouse) {
+            case "Gryffindor":
+                houseImg.src = "./images/gryffindor.png";
+                houseText.textContent = "¡Felicitaciones! Eres valiente, decidido y justo, y por eso has sido seleccionado para Gryffindor.";
+                break;
+            case "Slytherin":
+                houseImg.src = "./images/slytherin.png";
+                houseText.textContent = "¡Felicitaciones! Eres astuto, ambicioso y determinado, y por eso has sido seleccionado para Slytherin.";
+                break;
+            case "Ravenclaw":
+                houseImg.src = "./images/ravenclaw.png";
+                houseText.textContent = "¡Felicitaciones! Eres inteligente, creativo y perspicaz, y por eso has sido seleccionado para Ravenclaw.";
+                break;
+            case "Hufflepuff":
+                houseImg.src = "./images/hufflepuff.png";
+                houseText.textContent = "¡Felicitaciones! Eres leal, trabajador y justo, y por eso has sido seleccionado para Hufflepuff.";
+                break;
+            default:
+                break;
+        }
+
+        outcomeDiv.appendChild(houseImg);
+        outcomeDiv.appendChild(houseText);
+    }
+
 
 loadQuestion();
