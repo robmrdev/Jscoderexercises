@@ -52,7 +52,7 @@ h2 {
 #options button {
     height: 160px;
     width: 22%;
-    font-size: 0.8em;
+    font-size: 0.5em;
     background: rgba(0, 0, 0, 0.35);
     border-radius: 20%;
 }
