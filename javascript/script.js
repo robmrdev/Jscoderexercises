@@ -118,7 +118,7 @@ function finishQuiz() {
 localStorage.setItem("selectedHouse", selectedHouse);
 // Agregamos el resultado al DOM
 showResult();
-showSweetAlert()
+showSweetAlert();
 }
     function showResult() {
         const outcomeDiv = document.getElementById("outcome");
