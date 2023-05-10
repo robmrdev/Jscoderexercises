@@ -140,6 +140,7 @@ showSweetAlert();
         const outcomeDiv = document.getElementById("outcome");
         outcomeDiv.innerHTML = "";
         const houseImg = img;
+        houseImg.classList.add("houseImg");
         const houseText = document.createElement("p");
 
         switch (selectedHouse) {
@@ -162,6 +163,26 @@ showSweetAlert();
         default:
             break;
         }
+
+
+
+
+        fetch(`https://hp-api.onrender.com/api/characters/house/${selectedHouse}`)
+        .then(response => response.json())
+        .then(data => {
+            const charactersWithImages = data.filter(character => character.image); // Filtrar personajes que tengan una propiedad 'image'
+            const randomIndex = Math.floor(Math.random() * charactersWithImages.length);
+            const randomCharacter = charactersWithImages[randomIndex];
+            const imageUrl = randomCharacter.image;
+            const imageEl = document.createElement("img");
+            imageEl.src = imageUrl;
+            imageEl.classList.add("characterPortrait");
+            outcomeDiv.appendChild(imageEl);
+        })
+        .catch(error => console.error(error));
+
+
+
 
         outcomeDiv.appendChild(houseImg);
         outcomeDiv.appendChild(houseText);

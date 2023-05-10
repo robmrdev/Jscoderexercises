@@ -59,8 +59,12 @@ h2 {
 #outcome {
     justify-content: space-around;
 }
-#outcome img {
+.houseImg {
     width: 30%;
+}
+
+.characterPortrait{
+    height: 50vh;
 }
 #outcome p{
     width: 50%;
@@ -70,6 +74,7 @@ h2 {
     justify-content: center;
     display: flex;
     width: 100%;
+    color: white!important;
 }
 
 .swal2-popup {
