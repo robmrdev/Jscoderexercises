@@ -71,11 +71,21 @@ function checkAnswer(selected) {
         finishQuiz();
     }
 }
-
+//creamos una promesa para cargar las imagenes de las casas de manera asincronica
+function loadImage(url) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        img.src = url;
+    });
+}
 function finishQuiz() {
     const quiz = document.getElementById("quiz");
     quiz.remove();
 
+
+    
     const houses = {
         Gryffindor: 0,
         Slytherin: 0,
@@ -116,31 +126,49 @@ showSweetAlert()
         outcomeDiv.innerHTML = "";
         const houseImg = document.createElement("img");
         const houseText = document.createElement("p");
+        //Definimos las rutas de cada imagen para la promesa
+        const houseImages = {
+            Gryffindor: "./images/gryffindor.png",
+            Slytherin: "./images/slytherin.png",
+            Ravenclaw: "./images/ravenclaw.png",
+            Hufflepuff: "./images/hufflepuff.png",
+        };
+  // Carga la imagen de la casa ganadora
+    loadImage(houseImages[selectedHouse])
+    .then((img) => {
+      // Muestra la imagen y el texto en el DOM
+        const outcomeDiv = document.getElementById("outcome");
+        outcomeDiv.innerHTML = "";
+        const houseImg = img;
+        const houseText = document.createElement("p");
 
         switch (selectedHouse) {
-            case "Gryffindor":
-                houseImg.src = "./images/gryffindor.png";
-                houseText.textContent = "¡Felicitaciones! Eres valiente, decidido y justo, y por eso has sido seleccionado para Gryffindor.";
-                break;
-            case "Slytherin":
-                houseImg.src = "./images/slytherin.png";
-                houseText.textContent = "¡Felicitaciones! Eres astuto, ambicioso y determinado, y por eso has sido seleccionado para Slytherin.";
-                break;
-            case "Ravenclaw":
-                houseImg.src = "./images/ravenclaw.png";
-                houseText.textContent = "¡Felicitaciones! Eres inteligente, creativo y perspicaz, y por eso has sido seleccionado para Ravenclaw.";
-                break;
-            case "Hufflepuff":
-                houseImg.src = "./images/hufflepuff.png";
-                houseText.textContent = "¡Felicitaciones! Eres leal, trabajador y justo, y por eso has sido seleccionado para Hufflepuff.";
-                break;
-            default:
-                break;
+        case "Gryffindor":
+            houseText.textContent =
+            "¡Felicitaciones! Eres valiente, decidido y justo, y por eso has sido seleccionado para Gryffindor.";
+            break;
+        case "Slytherin":
+            houseText.textContent =
+            "¡Felicitaciones! Eres astuto, ambicioso y determinado, y por eso has sido seleccionado para Slytherin.";
+            break;
+        case "Ravenclaw":
+            houseText.textContent =
+            "¡Felicitaciones! Eres inteligente, creativo y perspicaz, y por eso has sido seleccionado para Ravenclaw.";
+            break;
+        case "Hufflepuff":
+            houseText.textContent =
+            "¡Felicitaciones! Eres leal, trabajador y justo, y por eso has sido seleccionado para Hufflepuff.";
+            break;
+        default:
+            break;
         }
 
         outcomeDiv.appendChild(houseImg);
         outcomeDiv.appendChild(houseText);
-    }
+    })
+    .catch((err) => console.error(err));
+}
+
 
     //definimos la alerta para reiniciar el Quiz
     function showSweetAlert() {
